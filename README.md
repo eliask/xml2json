@@ -17,7 +17,7 @@ optional arguments:
 ```
 
 # Examples
-```
+```sh
 # Normal usage for potentially unsafe XML files:
 pip install defusedxml
 ./xml2json.py sample_input.xml > sample_output.json
@@ -27,4 +27,46 @@ pip install defusedxml
 
 # Also supports reading from stdin:
 ./xml2json.py < sample_input.xml > sample_output.json
+```
+
+# Conversion logic
+Each element gets converted into an object of the form: `{ tagName : {@text: optional, @children: optional, ...attributes} }`
+## Input
+```xml
+<rootelem foo="bar">
+  some text
+  <child1>
+    <child2 attr1="baz" attr2="foo"/>
+    <child2 attr2="baz" attr3="foo"/>
+  </child1>
+</rootelem>
+```
+## Output
+```json
+{
+  "rootelem": {
+    "foo": "bar",
+    "@text": "some text",
+    "@children": [
+      {
+        "child1": {
+          "@children": [
+            {
+              "child2": {
+                "attr1": "baz",
+                "attr2": "foo"
+              }
+            },
+            {
+              "child2": {
+                "attr2": "baz",
+                "attr3": "foo"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
 ```
