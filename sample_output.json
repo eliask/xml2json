@@ -1,0 +1,39 @@
+{
+  "smses": {
+    "count": "4583",
+    "@children": [
+      {
+        "sms": {
+          "protocol": "0",
+          "address": "+123456",
+          "date": "1493000000000",
+          "type": "1",
+          "subject": "null",
+          "body": "testing \u04d2",
+          "toa": "null",
+          "sc_toa": "null",
+          "service_center": "null",
+          "read": "1",
+          "status": "-1",
+          "locked": "0"
+        }
+      },
+      {
+        "sms": {
+          "protocol": "0",
+          "address": "+6544321",
+          "date": "1494000000000",
+          "type": "1",
+          "subject": "null",
+          "body": "\u00e4\u00f6\u00e5",
+          "toa": "null",
+          "sc_toa": "null",
+          "service_center": "null",
+          "read": "1",
+          "status": "-1",
+          "locked": "0"
+        }
+      }
+    ]
+  }
+}
