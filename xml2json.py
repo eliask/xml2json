@@ -15,7 +15,7 @@ parser.add_argument('infile', nargs='?', type=argparse.FileType('rt'),
 def xml_element_to_dict(elem):
     "Convert XML Element to a simple dict"
     inner = dict(elem.attrib)
-    children = list(map(xml_element_to_dict, elem.getchildren()))
+    children = list(map(xml_element_to_dict, list(elem)))
     text = elem.text and elem.text.strip()
     if text:
         inner['@text'] = text
