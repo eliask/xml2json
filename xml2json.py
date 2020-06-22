@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""Convert XML to JSON."""
+
+from argparse import ArgumentParser, FileType
 from json import dump
 from sys import stdin, stdout
-from argparse import ArgumentParser, FileType
 
 parser = ArgumentParser(description='Convert an XML file to JSON.')
 parser.add_argument('--unsafe', action='store_true',
@@ -13,7 +15,7 @@ parser.add_argument('infile', nargs='?', type=FileType('rt'),
 
 
 def xml_element_to_dict(elem):
-    """Convert XML Element to a simple dict"""
+    """Convert XML Element to a simple dict."""
     inner = dict(elem.attrib)
     children = list(map(xml_element_to_dict, list(elem)))
     text = elem.text and elem.text.strip()
@@ -25,14 +27,14 @@ def xml_element_to_dict(elem):
     return {elem.tag: inner}
 
 
-def main(args):
-    """Dump JSON-from-parsed-XML to stdout"""
-    if args.unsafe:
+def main(arg):
+    """Dump JSON-from-parsed-XML to stdout."""
+    if arg.unsafe:
         from xml.etree.cElementTree import parse
     else:
         from defusedxml.cElementTree import parse
 
-    xml_parser = parse(args.infile)
+    xml_parser = parse(arg.infile)
     root = xml_parser.getroot()
 
     dump(xml_element_to_dict(root), stdout, indent=2)
